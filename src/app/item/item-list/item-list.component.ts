@@ -1,20 +1,8 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import {
-  BehaviorSubject,
-  combineLatest,
-  map,
-  mapTo,
-  Subject,
-  Subscription,
-  takeUntil,
-} from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Category } from 'src/app/category/category.model';
 import { CategoryService } from 'src/app/category/category.service';
 import { Item } from 'src/app/item/item.model';
@@ -30,10 +18,9 @@ import * as _ from 'lodash';
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
-  styles: []
+  styles: [],
 })
 export class ItemListComponent implements OnInit, OnDestroy {
-
   items: Item[];
   categories: Category[];
   categorySelected: number = null;
@@ -71,7 +58,6 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
     this.itemSubscription = this.itemService.itemsChanged.subscribe(
       (items: Item[]) => {
-        console.log(items);
         this.itemTableData.data = items;
       }
     );
@@ -143,17 +129,17 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
   onCategoryChange(): void {
     // if shop is not selected, filter the categories only, else consider shop selection as well
-    if (this.shopSelected == null) { 
+    if (this.shopSelected == null) {
       // if all categories is selected, show all, otherwise, filter using the selected category
-      if (this.categorySelected == -1) { 
-        this.itemTableData = new MatTableDataSource(this.items); // 
+      if (this.categorySelected == -1) {
+        this.itemTableData = new MatTableDataSource(this.items); //
       } else {
         const filter = this.filterByCategory(this.categorySelected);
         this.itemTableData = new MatTableDataSource(filter);
       }
     } else {
       // if both category and shop selected are not show all, call the both filter function
-      // if both category and shop selected are selected show all, show all 
+      // if both category and shop selected are selected show all, show all
       // if either category or shop is selected show all, just filter using one
       if (this.categorySelected != -1 && this.shopSelected != -1) {
         const filter = this.onSelectBothShopAndCategory(
@@ -230,5 +216,4 @@ export class ItemListComponent implements OnInit, OnDestroy {
     });
     return filter;
   }
-
 }

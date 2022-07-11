@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CategoryService } from '../category/category.service';
 import { ShopService } from '../shop/shop.service';
 import { Item } from './item.model';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+// import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({ providedIn: 'root' })
 export class ItemService {
@@ -134,7 +134,7 @@ export class ItemService {
   constructor(
     private categoryService: CategoryService,
     private shopService: ShopService, 
-    private db: AngularFirestore,
+    // private db: AngularFirestore,
   ) {}
 
   getItems() {
