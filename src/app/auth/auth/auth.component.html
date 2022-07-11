@@ -1,0 +1,159 @@
+<div class="container py-5 px-4">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+      <div class="card">
+        <div class="card-body p-5 text-center">
+          <h1 class="pb-4">Price Tracker App</h1>
+          <!-- <h3 class="pb-4">{{ isLoginMode ? "Sign In" : "Register" }}</h3> -->
+          <mat-tab-group mat-align-tabs="center" mat-stretch-tabs dynamicHeight [@.disabled]="true">
+            <mat-tab label="Sign In">
+              <div class="mt-4">
+                <div class="alert alert-danger" *ngIf="error">
+                  <p>{{ error }}</p>
+                </div>
+                <div *ngIf="isLoading">
+                  <mat-spinner class="mx-auto" mode="indeterminate" [diameter]="60"></mat-spinner>
+                </div>
+                <form
+                  #signInForm="ngForm"
+                  (ngSubmit)="onSignIn(signInForm)"
+                  *ngIf="!isLoading"
+                >
+                  <div class="row">
+                    <div class="col-12">
+                      <!-- Email input -->
+                      <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input
+                          type="email"
+                          matInput
+                          placeholder="Ex. pat@example.com"
+                          ngModel
+                          name="email"
+                          required
+                          email
+                        />
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <!-- Password input -->
+                      <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input
+                          type="password"
+                          matInput
+                          placeholder="Ex. pat@example.com"
+                          ngModel
+                          name="password"
+                          required
+                          minlength="6"
+                        />
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <!-- Checkbox -->
+                      <div class="d-flex justify-content-start mb-4">
+                        <mat-checkbox color="primary" name="rememberPassword" ngModel
+                          >Remember me for 30 days</mat-checkbox
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <!-- Login Button -->
+                      <button
+                        class="col-12 mb-4 p-1 text-uppercase"
+                        mat-raised-button
+                        color="primary"
+                        type="submit"
+                        [disabled]="!signInForm.valid"
+                      >
+                        Sign In
+                      </button>
+                      <!-- Register Button -->
+                      <div>
+                        <p class="text-start">
+                          <a type="button" class="theme-primary" (click)="forgetPassword()">Forgot Password?</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              
+            </mat-tab>
+            <mat-tab label="Sign Up">
+              <div class="mt-4">
+                <div class="alert alert-danger" *ngIf="error">
+                  <p>{{ error }}</p>
+                </div>
+                <div *ngIf="isLoading">
+                  <mat-spinner class="mx-auto" mode="indeterminate" [diameter]="60"></mat-spinner>
+                </div>
+                <form
+                  #signUpForm="ngForm"
+                  (ngSubmit)="onSignUp(signUpForm)"
+                  *ngIf="!isLoading"
+                >
+                  <div class="row">
+                    <div class="col-12">
+                      <!-- Email input -->
+                      <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input
+                          type="email"
+                          matInput
+                          placeholder="Ex. pat@example.com"
+                          ngModel
+                          name="email"
+                          required
+                          email
+                        />
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <!-- Password input -->
+                      <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input
+                          type="password"
+                          matInput
+                          placeholder="Ex. pat@example.com"
+                          ngModel
+                          name="password"
+                          required
+                          minlength="6"
+                        />
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <!-- Login Button -->
+                      <button
+                        class="col-12 mb-4 p-1 text-uppercase"
+                        mat-raised-button
+                        color="primary"
+                        type="submit"
+                        [disabled]="!signUpForm.valid"
+                      >
+                        Sign Up
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

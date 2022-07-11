@@ -1,0 +1,214 @@
+<div class="container p-4">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-12 col-lg-8">
+      <div class="card shadow-2-strong" style="border-radius: 1rem">
+        <div class="card-body p-4 p-md-5 text-center">
+          <h1 class="pb-4 pb-md-5">{{ editMode ? "Edit an Item" : "Add a new Item"}}</h1>
+          <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field appearance="outline">
+                  <mat-label>Item Name</mat-label>
+                  <input
+                    matInput
+                    placeholder="Please enter Item Name"
+                    formControlName="name"
+                  />
+                  <mat-error *ngIf="hasError('name', 'required')"
+                    >Item Name is <b>required</b>.</mat-error
+                  >
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-lg-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Price</mat-label>
+                  <input
+                    type="number"
+                    placeholder="Please enter Item Price"
+                    matInput
+                    formControlName="price"
+                    step="0.1"
+                  />
+                  <mat-error *ngIf="hasError('price', 'required')"
+                    >Price is <b>required</b>.</mat-error
+                  >
+                </mat-form-field>
+              </div>
+              <div class="col-md-12 col-lg-6">
+                <div class="row">
+                  <div class="col-7">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Unit Price</mat-label>
+                      <input
+                        type="number"
+                        matInput
+                        placeholder="Please enter Unit Price"
+                        formControlName="unitPrice"
+                        step="0.1"
+                      />
+                      <mat-error *ngIf="hasError('unitPrice', 'required')"
+                        >Unit Price is <b>required</b>.</mat-error
+                      >
+                    </mat-form-field>
+                  </div>
+                  <div class="col-5 ps-0">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Unit Measure</mat-label>
+                      <mat-select formControlName="unitMeasure">
+                        <mat-option
+                          *ngFor="let measure of unitMesaure"
+                          [value]="measure.value"
+                        >
+                          {{ measure.value }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-lg-6">
+                <div class="row justify-content-start align-items-center">
+                  <div class="col-9 d-inline pe-0">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Category</mat-label>
+                      <mat-select formControlName="category">
+                        <mat-option
+                          *ngFor="let category of categories"
+                          [value]="category.id"
+                        >
+                          {{ category.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-3 d-inline">
+                    <div class="mat-form-field">
+                      <div class="mat-form-field-wrapper">
+                        <button
+                          type="button"
+                          class="btn btn-icon"
+                          color="primary"
+                          mat-icon-button
+                          mat-flat-button
+                          matTooltip="Add New Category"
+                          matTooltipPosition="below"
+                          (click)="openCatDialog()"
+                        >
+                          <mat-icon>add</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-lg-6">
+                <div class="row justify-content-start align-items-center">
+                  <div class="col-9 d-inline pe-0">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Shop</mat-label>
+                      <mat-select formControlName="shop">
+                        <mat-option
+                          *ngFor="let shop of shops"
+                          [value]="shop.id"
+                        >
+                          {{ shop.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-3 d-inline">
+                    <div class="mat-form-field">
+                      <div class="mat-form-field-wrapper">
+                        <button
+                          type="button"
+                          class="btn btn-icon"
+                          color="primary"
+                          mat-icon-button
+                          mat-flat-button
+                          matTooltip="Add New Shop"
+                          matTooltipPosition="below"
+                          (click)="openShopDialog()"
+                        >
+                          <mat-icon matSuffix>add</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 col-md-12 col-lg-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Discount</mat-label>
+                  <input
+                    type="number"
+                    matInput
+                    placeholder="Please enter Item Discount"
+                    formControlName="discount"
+                    step="5"
+                    min="0"
+                    max="99"
+                  />
+                  <mat-icon matSuffix>percent</mat-icon>
+                  <mat-error *ngIf="hasError('discount', 'required')"
+                    >Discount is <b>required</b>.</mat-error
+                  >
+                  <mat-error *ngIf="hasError('discount', 'min')"
+                    >Min discount is <b>0%</b>.</mat-error
+                  >
+                  <mat-error *ngIf="hasError('discount', 'max')"
+                    >Max discount is <b>99%</b>.</mat-error
+                  >
+                </mat-form-field>
+              </div>
+              <div class="col-6 col-md-12 col-lg-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Purchase Date</mat-label>
+                  <input
+                    [max]="maxDate"
+                    matInput
+                    [matDatepicker]="picker"
+                    formControlName="purchaseDate"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-6">
+                <button
+                  type="button"
+                  class="btn-cancel col-12 p-2 text-uppercase"
+                  (click)="onCancel()"
+                  mat-raised-button
+                >
+                  Cancel
+                </button>
+              </div>
+              <div class="col-6">
+                <button
+                  type="submit"
+                  class="btn col-12 p-2 text-uppercase"
+                  color="primary"
+                  [disabled]="!itemForm.valid || !itemForm.dirty"
+                  mat-raised-button
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

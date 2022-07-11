@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand theme-primary" href="https://jake-08.github.io/jakelin/main/" target="_blank">Price Tracker App</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNavAltMarkup"
+      >
+      <mat-icon class="align-middle">menu</mat-icon>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLinkActive="active"
+              data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show"
+              [routerLinkActiveOptions]="{ exact: true }"
+              routerLink="/item"
+              *ngIf="isAuthenticated"
+              >Items</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLinkActive="active"
+              data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show"
+              [routerLinkActiveOptions]="{ exact: true }"
+              routerLink="/category"
+              *ngIf="isAuthenticated"
+              >Categories</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLinkActive="active"
+              data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show"
+              [routerLinkActiveOptions]="{ exact: true }"
+              routerLink="/shop"
+              *ngIf="isAuthenticated"
+              >Shops</a
+            >
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-right">
+          <li class="nav-item">
+            <a
+              type="button"
+              class="nav-link"
+              data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show"
+              routerLinkActive="active"
+              *ngIf="isAuthenticated"
+              (click)="onLogout()"
+              >Logout</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    

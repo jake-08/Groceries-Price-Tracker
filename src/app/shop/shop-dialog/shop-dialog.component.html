@@ -1,0 +1,32 @@
+<h1 class="text-center" mat-dialog-title>Create a New Shop</h1>
+<div mat-dialog-content [formGroup]="shopForm">
+  <mat-form-field appearance="outline">
+    <mat-label>New Shop</mat-label>
+    <input
+      matInput
+      placeholder="Create a New Shop"
+      formControlName="name"
+      cdkFocusInitial
+      (keyup.enter)="onAdd()"
+    />
+    <mat-error *ngIf="hasError('name', 'required')"
+      >Shop is <b>required</b>.</mat-error
+    >
+    <mat-error *ngIf="hasError('name', 'duplicatedShop')"
+      >This shop already <b>exists</b>.</mat-error
+    >
+  </mat-form-field>
+</div>
+<div class="d-flex justify-content-between" mat-dialog-actions>
+  <button class="btn-cancel" mat-raised-button (click)="onCancel()">
+    Cancel
+  </button>
+  <button
+    class="btn"
+    mat-raised-button
+    (click)="onAdd()"
+    [disabled]="!shopForm.valid"
+  >
+    Add
+  </button>
+</div>

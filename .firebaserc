@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "groceries-tracker-7778c": {
+      "hosting": {
+        "groceries-price-tracker": [
+          "groceries-tracker-7778c"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "groceries-tracker-7778c"
+  }
+}

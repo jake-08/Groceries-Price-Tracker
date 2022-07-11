@@ -1,1 +1,309 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$groceries-price-tracker-primary: mat.define-palette(mat.$indigo-palette);
+$groceries-price-tracker-accent: mat.define-palette(
+  mat.$indigo-palette,
+  A200,
+);
+
+// The warn palette is optional (defaults to red).
+$groceries-price-tracker-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$groceries-price-tracker-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $groceries-price-tracker-primary,
+      accent: $groceries-price-tracker-accent,
+      warn: $groceries-price-tracker-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($groceries-price-tracker-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --theme-primary: #3F51B5;
+  --theme-secondary: #536DFE;
+  --white: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f0f0f0;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h5 {
+  margin: 0;
+}
+
+h1, h2, h3 {
+  color: var(--theme-primary) !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+.theme-primary {
+  color: var(--theme-primary) !important;
+}
+
+.theme-blue-bg {
+  background-color: #0288D1;
+}
+
+.theme-orange {
+  color: #F57F17 !important;
+  font-weight: 500;
+}
+
+.theme-green {
+  color: #4CAF50 !important;
+  font-weight: 500;
+}
+
+nav {
+  box-shadow: 0 4px 12px 0 rgb(0 0 0 / 7%), 0 2px 4px rgb(0 0 0 / 5%);
+  padding: 0.5rem 1rem;
+}
+
+.navbar-brand {
+  font-weight: 500;
+}
+
+.navbar-nav > li {
+  padding-left: 15px;
+}
+
+.navbar-nav .nav-link.active {
+  color: var(--theme-primary) !important;
+}
+
+.card {
+  border-radius: 1rem;
+  box-shadow: 0 2px 10px 0 rgb(0 0 0 / 21%) !important;
+}
+
+button:disabled {
+  background-color: #9FA8DA !important;
+  color: #fff !important;
+}
+
+.btn-icon {
+  transform: scale(1.2);
+}
+
+.btn-cancel {
+  color: #fff;
+  background-color: #5a6268;
+}
+
+.btn:hover {
+  background-color: var(--theme-secondary);
+}
+
+.btn-warn:hover {
+  background-color: #E57373;
+}
+
+.btn-cancel:hover {
+  background-color: #757575;
+}
+
+.btn:active, .btn-cancel:active, .btn-warn:active {
+  transform: scale(0.90);
+}
+
+
+// Overriding Material Component
+
+.mat-tab-label .mat-tab-label-content {
+  font-size: 16px !important;
+}
+
+mat-form-field.mat-form-field {
+  width: 100%;
+}
+
+mat-icon {
+  transform: scale(0.9);
+}
+
+@media (max-width: 885px) {
+  mat-form-field.mat-form-field {
+    font-size: 14px;
+  }
+
+  .mat-dialog-content {
+    font-size: 14px;
+  }
+
+  .cdk-overlay-pane {
+    margin-top: 40% !important;
+  }
+}
+
+// Table Styling
+
+table {
+  width: 100%;
+}
+
+table.category-table, table.items-table {
+  border-collapse: collapse;
+  width: 100%;
+  box-shadow: none !important;
+}
+
+table.category-table th, table.items-table th {
+  font-size: 16px;
+  background-color: rgba(251, 251, 251, 1);
+  color: #333;
+  border-bottom: 2px solid #dee2e6;
+  border-top: 2px solid #dee2e6;
+}
+
+table.category-table td, table.items-table td {
+  padding: 1rem 1.4rem;
+}
+
+table.category-table th:nth-child(1) {
+  width: 70%;
+}
+
+table.category-table th:not(:first-child) {
+  text-align: center;
+  width: 15%;
+}
+
+table.items-table th:nth-child(1) {
+  width: 30%;
+}
+
+table.items-table th:not(:first-child) {
+  text-align: center;
+  width: 14%;
+}
+
+table.items-table td {
+  vertical-align: middle;
+}
+
+table.items-table td:not(:first-child) {
+  text-align: center;
+}
+
+@media (max-width: 885px) {
+  .mat-table[itemTableResponsive] {
+    .mat-header-row {
+      display: flex;
+      flex-wrap: wrap;
+      height: auto;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+
+      th.mat-header-cell {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        padding: 1rem 0.5rem;
+        justify-content: space-around;
+
+        & > .mat-sort-header-container {
+          padding-left: 15px; // padding is used to center the header table cells, due to the width of the sort icon
+        }
+
+        &:not([mat-sort-header]),
+        &.mat-sort-header-disabled,
+        &.mat-column-actions {
+          display: none;
+        }
+      }
+    }
+
+    .mat-row {
+      height: auto;
+      
+      &:not(:last-of-type)  {
+        border-bottom: 2px solid #333;
+      }
+
+      td.mat-cell:not(.mat-column-actions) {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        text-align: right;
+        word-break: break-word;
+        padding: 1rem;
+
+        & > * {
+          grid-column: 2;
+        }
+
+        &:before {
+          content: attr(data-column-name);
+          text-align: left;
+          font-weight: 500;
+          color: var(--theme-primary);
+        }
+      }
+
+      td.mat-column-actions {
+        display: flex;
+        justify-content: center;
+        padding: 0 0.5rem;
+
+        & > button {
+          margin: 0.5rem 0;
+        }
+      }
+
+      &:not(:last-of-type) td:last-of-type {
+        border-bottom: 2px solid #dee2e6;
+      }
+    }
+  }
+
+  .mat-card,
+  .mat-expansion-panel {
+    .mat-table[itemTableResponsive] {
+      border: 0.5rem solid #fafafa;
+    }
+  }
+}
