@@ -14,6 +14,7 @@ import {
 import { Shop } from 'src/app/shop/shop.model';
 import { ShopService } from 'src/app/shop/shop.service';
 import * as _ from 'lodash';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-item-list',
@@ -46,10 +47,15 @@ export class ItemListComponent implements OnInit, OnDestroy {
     private shopService: ShopService,
     private router: Router,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private db: AngularFirestore,
   ) {}
 
   ngOnInit(): void {
+    this.db.collection('items').valueChanges().subscribe(result => {
+      console.log(result[0]['category'])
+    })
+
     this.items = this.itemService.getItems();
     this.categories = this.categoryService.getCategories();
     this.shops = this.shopService.getShops();
